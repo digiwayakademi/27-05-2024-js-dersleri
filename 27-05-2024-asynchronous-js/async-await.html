@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promise 2</title>
+</head>
+<body>
+    
+
+
+<script>
+
+
+
+
+console.log("start");
+
+const serverStatus = false;
+
+const login = (username, password) => {
+    return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                if(serverStatus)
+                {
+                    resolve({username: username, email: "atakan@digiway.com.tr"})  
+                }else{
+                    reject("Servera bağlantı kurulamıyor.")
+                }                
+            },1000);
+    })
+   
+}
+
+const getPostsByUsername = (username) => {
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(["post 1","post 2","post 3"]);
+    },2000);  
+    })     
+}
+
+const getPostDetails = (post) => {
+        return new Promise((resolve, reject) => {
+            setTimeout(() => {
+                resolve("POST Details");
+        },1000)     
+    })   
+}
+
+
+async function displayUser() {
+    try{
+        const user = await login("atakananilgenc",123456);
+        console.log(user);
+        const posts = await getPostsByUsername(user.username);
+        console.log(posts);
+        const details = await getPostDetails(posts[0]);
+        console.log(details);
+    }
+    catch(err){
+        console.log(err);
+    }
+    
+}
+
+displayUser();
+
+
+
+
+console.log("end");
+
+
+
+//callback hell - iç içe çok callback kullanımında verilen isim 
+
+
+</script>
+</body>
+</html>
